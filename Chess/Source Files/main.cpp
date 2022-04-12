@@ -1,3 +1,4 @@
+#include "../Header Files/Chess_board.h"
 #include "../Header Files/Figures.h"
 
 int main()
@@ -6,7 +7,7 @@ int main()
   settings.antialiasingLevel = 16;
   int modeHeight = 1080;
   int modeWidth = 1920;
-  sf::RenderWindow window(sf::VideoMode(modeWidth, modeHeight), "Chess", sf::Style::Default);
+  sf::RenderWindow window(sf::VideoMode(modeWidth, modeHeight), "Chess", sf::Style::Fullscreen);
 
   sf::Image logo;
   if (!logo.loadFromFile("../Images/Logo.jpg")) {
