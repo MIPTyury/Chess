@@ -5,6 +5,7 @@
 #include <SFML/Window.hpp>
 #include <SFML/Audio.hpp>
 #include <iostream>
+#include "Figures.h"
 
 class Chess_cell {
 private:
@@ -22,7 +23,7 @@ public:
     }
 
     void black() {
-      color = sf::Color::Black;
+      color = sf::Color::Red;
       cell.setFillColor(color);
     }
 
@@ -76,7 +77,52 @@ public:
     }
 };
 
-void board_init(sf::RenderWindow &window) {
+void figures_positions_init () {
+  for (int i = 0; i < 8; i++) {
+    white_pawns[i].white_pawn();
+    white_pawns[i].set_pos(50 + 75 * i, 160 + 75 * 6);
+
+    black_pawns[i].black_pawn();
+    black_pawns[i].set_pos(50 + 75 * i, 160 + 75 * 1);
+  }
+  white_queen.white_queen();
+  white_queen.set_pos(50 + 75 * 3, 160 + 75 * 7);
+
+  white_king.white_king();
+  white_king.set_pos(50 + 75 * 4, 160 + 75 * 7);
+
+  black_king.black_king();
+  black_king.set_pos(50 + 75 * 3, 160);
+
+  black_queen.black_queen();
+  black_queen.set_pos(50 + 75 * 4, 160);
+
+  for (int i = 0; i < 2; i++) {
+    white_bishop[i].white_bishop();
+    white_knight[i].white_knight();
+    white_rook[i].white_rook();
+
+    black_bishop[i].black_bishop();
+    black_knight[i].black_knight();
+    black_rook[i].black_rook();
+  }
+  white_bishop[0].set_pos(50 + 75 * 2, 160 + 75 * 7);
+  white_bishop[1].set_pos(50 + 75 * 5, 160 + 75 * 7);
+  white_knight[0].set_pos(50 + 75 * 1, 160 + 75 * 7);
+  white_knight[1].set_pos(50 + 75 * 6, 160 + 75 * 7);
+  white_rook[0].set_pos(50 + 75 * 0, 160 + 75 * 7);
+  white_rook[1].set_pos(50 + 75 * 7, 160 + 75 * 7);
+
+  black_bishop[0].set_pos(50 + 75 * 2, 160);
+  black_bishop[1].set_pos(50 + 75 * 5, 160);
+  black_knight[0].set_pos(50 + 75 * 1, 160);
+  black_knight[1].set_pos(50 + 75 * 6, 160);
+  black_rook[0].set_pos(50 + 75 * 0, 160);
+  black_rook[1].set_pos(50 + 75 * 7, 160);
+
+}
+
+void board_draw(sf::RenderWindow &window) {
 
   sf::Font font;
   if (!font.loadFromFile("../Fonts/Times New Roman.ttf")) {
@@ -93,7 +139,6 @@ void board_init(sf::RenderWindow &window) {
   board_marker_text.setPosition(20, 160);
 
   Chess_cell cells[8][8];
-  Board_marker board_markers[16];
 
   for (int i = 0; i < 8; i++) {
     for (int j = 0; j < 8; j++) {
@@ -119,6 +164,29 @@ void board_init(sf::RenderWindow &window) {
     board_marker_text.setPosition(50 + 75 * (i - 8) + 20, 160 + 75 * 8 - 10);
     board_marker_text.setString(row);
     window.draw(board_marker_text);
+  }
+
+  figures_positions_init();
+
+  for (int i = 0; i < 8; i++) {
+    white_pawns[i].draw(window);
+    black_pawns[i].draw(window);
+  }
+
+  white_queen.draw(window);
+  white_king.draw(window);
+
+  black_queen.draw(window);
+  black_king.draw(window);
+
+  for (int i = 0; i < 2; i++) {
+    white_rook[i].draw(window);
+    white_knight[i].draw(window);
+    white_bishop[i].draw(window);
+
+    black_rook[i].draw(window);
+    black_knight[i].draw(window);
+    black_bishop[i].draw(window);
   }
 }
 

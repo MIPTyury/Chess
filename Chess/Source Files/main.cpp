@@ -15,11 +15,15 @@ int main()
   }
   window.setIcon(416, 416, logo.getPixelsPtr());
 
+  bool board_init_checker = 0;
   // run the program as long as the window is open
   while (window.isOpen())
   {
     window.clear(sf::Color::Green);
-    board_init(window);
+
+    board_draw(window);
+
+
     // check all the window's events that were triggered since the last iteration of the loop
     sf::Event event;
     while (window.pollEvent(event))
